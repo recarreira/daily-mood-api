@@ -38,8 +38,18 @@ class MoodHandler(Resource):
         return jsonify(serialized.data)
 
 
+class MoodDateHandler(Resource):
+
+    def get(self, year, month, day):
+        moods = Mood.select().where(Mood.created.between(
+            datetime.date(year, month, day),
+            datetime.date(year, month, day) + datetime.timedelta(days=1)))
+        serialized = MoodSerializer(list(moods), many=True)
+        return jsonify({"moods": serialized.data})
+
 
 api.add_resource(RootHandler, '/', '/docs')
+api.add_resource(MoodDateHandler, '/api/v1/moods/<int:year>/<int:month>/<int:day>', '/api/v1/moods/<int:year>/<int:month>/<int:day>/')
 api.add_resource(MoodHandler, '/api/v1/moods', '/api/v1/moods/')
 
 

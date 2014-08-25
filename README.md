@@ -58,6 +58,42 @@ Server: Werkzeug/0.9.6 Python/2.7.5
 }
 ```
 
+#### List moods by date
+```
+http GET http://localhost:5000/api/v1/moods/{year}/{month}/{day}
+```
+
+Example:
+```bash
+$ http GET http://localhost:5000/api/v1/moods/2014/08/24
+HTTP/1.0 200 OK
+Content-Length: 362
+Content-Type: application/json
+Date: Mon, 25 Aug 2014 03:28:32 GMT
+Server: Werkzeug/0.9.6 Python/2.7.5
+
+{
+    "moods": [
+        {
+            "created": "Sun, 24 Aug 2014 22:53:11 -0000",
+            "level": "1"
+        },
+        {
+            "created": "Sun, 24 Aug 2014 22:54:10 -0000",
+            "level": "1"
+        },
+        {
+            "created": "Sun, 24 Aug 2014 22:54:17 -0000",
+            "level": "4"
+        },
+        {
+            "created": "Sun, 24 Aug 2014 22:54:21 -0000",
+            "level": "3"
+        }
+    ]
+}
+```
+
 #### List all moods
 ```
 http GET http://localhost:5000/api/v1/moods
